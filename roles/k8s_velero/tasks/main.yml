@@ -9,22 +9,22 @@
       - "velero-{{ velero_version }}-linux-amd64/velero"
 
 - name: Add stable chart repo
-  community.kubernetes.helm_repository:
+  kubernetes.core.helm_repository:
     name: minio
     repo_url: "https://helm.min.io"
 
 - name: Create namespace
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: v1
     kind: Namespace
     name: velero
 
 - name: Create backup NFS PV
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition: '{{ backup_nfs_pv }}'
 
 - name: Create backup NFS PVC
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: v1
       kind: PersistentVolumeClaim
@@ -41,7 +41,7 @@
         volumeName: '{{ backup_nfs_pv.metadata.name }}'
 
 - name: Install MinIO as a NAS gateway
-  community.kubernetes.helm:
+  kubernetes.core.helm:
     name: minio
     namespace: velero
     create_namespace: yes

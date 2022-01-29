@@ -12,7 +12,7 @@ license_file: 'LICENSE'
 tags: ['kubernetes', 'k8s']
 
 dependencies:
-  community.kubernetes: "*"
+  kubernetes.core: "*"
 
 repository: https://github.com/fabianvf/home-cluster
 issues: https://github.com/fabianvf/home-cluster/issues

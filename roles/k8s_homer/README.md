@@ -16,7 +16,7 @@ cluster_subdomain - The subdomain to set for ingresses created during the execut
 Dependencies
 ------------
 
-Requires the community.kubernetes ansible collection
+Requires the kubernetes.core ansible collection
 
 Example Playbook
 ----------------

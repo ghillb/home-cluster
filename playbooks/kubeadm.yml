@@ -22,7 +22,7 @@
       changed_when: false
 
     - name: Check component statuses
-      community.kubernetes.k8s_info:
+      kubernetes.core.k8s_info:
         api_version: v1
         kind: ComponentStatus
       ignore_errors: yes
@@ -52,13 +52,13 @@
         flat: yes
 
     - name: Get list of nodes
-      community.kubernetes.k8s_info:
+      kubernetes.core.k8s_info:
         api_version: v1
         kind: Node
       register: k8s_nodes
 
     - name: Untaint master node
-      community.kubernetes.k8s:
+      kubernetes.core.k8s:
         api_version: v1
         kind: Node
         name: '{{ item.metadata.name }}'
@@ -69,7 +69,7 @@
       when: master_node_schedulable and item.spec.taints is defined and item.spec.taints
 
     - name: Install Calico Pod Network plugin
-      community.kubernetes.k8s:
+      kubernetes.core.k8s:
         definition: "{{ item }}"
         kubeconfig: /etc/kubernetes/admin.conf
       loop: '{{ lookup("url", "https://docs.projectcalico.org/v3.14/manifests/calico.yaml", split_lines=False) | from_yaml_all | list }}'
@@ -85,7 +85,7 @@
   tasks:
 
     - name: Get node
-      community.kubernetes.k8s_info:
+      kubernetes.core.k8s_info:
         api_version: v1
         kind: Node
         name: '{{ inventory_hostname }}'
@@ -105,7 +105,7 @@
       when: not kubeadm_node.resources
 
     - name: Ensure node is a worker
-      community.kubernetes.k8s:
+      kubernetes.core.k8s:
         definition:
           apiVersion: v1
           kind: Node

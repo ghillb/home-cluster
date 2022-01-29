@@ -17,7 +17,7 @@ kubernetes_node - Whether the node is a worker. Used for determining what to ins
 Dependencies
 ------------
 
-Requires the community.kubernetes ansible collection
+Requires the kubernetes.core ansible collection
 
 Example Playbook
 ----------------

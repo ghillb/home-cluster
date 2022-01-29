@@ -13,4 +13,4 @@ galaxy_info:
     - homelab
 
 # dependencies:
-#   - community.kubernetes
+#   - kubernetes.core

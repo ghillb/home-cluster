@@ -19,7 +19,7 @@ artifacts_dir - A existing directory to store generated password/userids
 Dependencies
 ------------
 
-Requires the community.kubernetes ansible collection
+Requires the kubernetes.core ansible collection
 
 Example Playbook
 ----------------

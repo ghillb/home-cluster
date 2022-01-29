@@ -1,13 +1,13 @@
 ---
 - block:
   - name: Create a test namespace
-    community.kubernetes.k8s:
+    kubernetes.core.k8s:
       api_version: v1
       kind: Namespace
       name: velero-test
 
   - name: Create test PVC
-    community.kubernetes.k8s:
+    kubernetes.core.k8s:
       definition:
         apiVersion: v1
         kind: PersistentVolumeClaim
@@ -22,7 +22,7 @@
               storage: 1Gi
 
   - name: Create test pod
-    community.kubernetes.k8s:
+    kubernetes.core.k8s:
       wait: yes
       definition:
         apiVersion: v1
@@ -46,13 +46,13 @@
               claimName: test-velero
 
   - name: Populate test volume
-    community.kubernetes.k8s_exec:
+    kubernetes.core.k8s_exec:
       namespace: velero-test
       pod: test
       command: sh -c "echo 'hello world' > /opt/test/text"
 
   - name: Wait for message to appear in pod log
-    community.kubernetes.k8s_log:
+    kubernetes.core.k8s_log:
       name: test
       namespace: velero-test
     register: test_pod_log
@@ -71,7 +71,7 @@
     register: test_pvc
 
   - name: Delete test namespace
-    community.kubernetes.k8s:
+    kubernetes.core.k8s:
       api_version: v1
       kind: Namespace
       name: velero-test
@@ -79,7 +79,7 @@
       wait: yes
 
   - name: Delete volume backing pvc
-    community.kubernetes.k8s:
+    kubernetes.core.k8s:
       api_version: v1
       kind: PersistentVolume
       name: '{{ test_pvc.resources.0.spec.volumeName }}'
@@ -102,7 +102,7 @@
     delay: 6
 
   - name: Wait for message to appear in pod log
-    community.kubernetes.k8s_log:
+    kubernetes.core.k8s_log:
       name: test
       namespace: velero-test
     register: test_pod_log
@@ -115,7 +115,7 @@
       ignore_errors: yes
 
     - name: Delete test namespace
-      community.kubernetes.k8s:
+      kubernetes.core.k8s:
         api_version: v1
         kind: Namespace
         name: velero-test

@@ -23,7 +23,7 @@ storage_cephfs_default: - Set to true to set rook-cephfs as the default storagec
 Dependencies
 ------------
 
-Requires the community.kubernetes ansible collection
+Requires the kubernetes.core ansible collection
 
 Example Playbook
 ----------------

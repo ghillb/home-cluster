@@ -22,13 +22,13 @@ My wife is a photographer, and generates between 1TB and 3TB of media per year. 
 ## Dependencies
 You  will need:
 - Ansible >= 2.9
-- the community.kubernetes Ansible collection
+- the kubernetes.core Ansible collection
 
 For Fedora:
 
 ```bash
 dnf install -y ansible
-ansible-galaxy collection install community.kubernetes
+ansible-galaxy collection install kubernetes.core
 ```
 
 ## Virtual environment

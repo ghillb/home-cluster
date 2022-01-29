@@ -1,6 +1,6 @@
 ---
 - name: Create Hello World webapp
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: apps/v1
       kind: Deployment
@@ -24,7 +24,7 @@
               name: hello-app
 
 - name: Create Hello World webapp service
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: v1
       kind: Service
@@ -42,7 +42,7 @@
           app: web
 
 - name: Create Hello World webapp ingress
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: networking.k8s.io/v1beta1
       kind: Ingress
@@ -78,7 +78,7 @@
 - debug: var=hello_world_result
 
 - name: Clean up Hello World app
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: '{{ item.api_version }}'
     kind: '{{ item.kind }}'
     name: web

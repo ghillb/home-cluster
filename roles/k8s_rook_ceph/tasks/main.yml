@@ -1,17 +1,17 @@
 ---
 - name: Add rook-release helm repo
-  community.kubernetes.helm_repository:
+  kubernetes.core.helm_repository:
     name: rook-release
     url: https://charts.rook.io/release
 
 - name: Create namespace
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: v1
     kind: Namespace
     name: rook-ceph
 
 - name: Install rook
-  community.kubernetes.helm:
+  kubernetes.core.helm:
     name: rook-ceph
     namespace: rook-ceph
     chart_ref: rook-release/rook-ceph
@@ -19,7 +19,7 @@
       hostPathRequiresPrivileged: false
 
 - name: Create rook-ceph cluster
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: ceph.rook.io/v1
       kind: CephCluster
@@ -60,7 +60,7 @@
           useAllNodes: true
 
 - name: Create Ceph block storage
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: ceph.rook.io/v1
       kind: CephBlockPool
@@ -74,7 +74,7 @@
   when: storage_block_create
 
 - name: Create Ceph block storageclass
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: storage.k8s.io/v1
       kind: StorageClass
@@ -97,7 +97,7 @@
   when: storage_block_create
 
 - name: Create Ceph Filesystem storage
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: ceph.rook.io/v1
       kind: CephFilesystem
@@ -120,7 +120,7 @@
   when: storage_cephfs_create
 
 - name: Create Ceph FileSystem storageclass
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: storage.k8s.io/v1
       kind: StorageClass
@@ -141,7 +141,7 @@
   when: storage_cephfs_create
 
 - name: Create rook-ceph-manager dashboard ingress
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: networking.k8s.io/v1beta1
       kind: Ingress

@@ -1,6 +1,6 @@
 ---
 - name: Create a test PVC
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     definition:
       apiVersion: v1
       kind: PersistentVolumeClaim
@@ -15,7 +15,7 @@
             storage: 1Gi
 
 - name: Wait for test PVC to become bound
-  community.kubernetes.k8s_info:
+  kubernetes.core.k8s_info:
     api_version: v1
     kind: PersistentVolumeClaim
     name: test-pvc
@@ -26,7 +26,7 @@
   delay: 30
 
 - name: Delete the test PVC
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: v1
     kind: PersistentVolumeClaim
     name: test-pvc
